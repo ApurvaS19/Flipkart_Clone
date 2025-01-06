@@ -11,14 +11,9 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-export default function myDrawer(props) {
-  console.log(props.drawerOpen);
-
-   React.useEffect(()=>{
-    console.log("props changed",props.drawerOpen)
-   },[props.drawerOpen])
-
+export default function Drawer1() {
   const [open, setOpen] = React.useState(false);
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
