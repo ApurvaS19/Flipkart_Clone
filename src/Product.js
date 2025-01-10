@@ -8,6 +8,14 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Drawer1 from './Drawer1';
 import Appbar from './Appbar';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StoreIcon from '@mui/icons-material/Store';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 function Product(){
   
@@ -35,11 +43,10 @@ function Product(){
            <b>Brand</b>:{data.brand}<br></br><br></br>
            <b>Price</b>:${data.price}<br></br><br></br>
            <b>Return Policy</b>:{data.returnPolicy}<br></br><br></br>
-           <Button variant="contained">Buy Now</Button>
-           <Button variant="contained">Add to Cart</Button>
+           <Button variant="contained" startIcon={<StoreIcon />}>Buy Now</Button>
+           <Button variant="contained" startIcon={<ShoppingCartIcon/>}>Add To Cart</Button>
           </Grid2>
      
-
          <Grid2 size={{ xs: 12, md: 6 }}>
           <b>Rating:</b>
           {data.rating}
@@ -48,13 +55,35 @@ function Product(){
              {
             (data.reviews && data.reviews.length > 0)?
               data.reviews.map((val)=>{
-                return <div>{val.comment} {val.rating}</div>
-              }):"Loading..."
+
+                return <Grid2 item size={ {xs:12, md: 3} } >
+                <Card sx={{ minWidth: 275 ,backgroundColor:"SkyBlue",margin:"10px" ,border:"2px solid black"}}>
+                    <CardContent>
+                        <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
+                        <Rating name="size-small" value={parseInt (val.rating)} /> 
+                        </Typography>
+                        <Typography variant="h5" component="div">
+                        
+                        </Typography>
+                        <Typography sx={{ color: 'text.secondary', mb: 1.5 }}><b>{val.comment}</b> </Typography>
+                        <Typography variant="body2">
+                        <b>{val.reviewerName}</b><br></br>
+                        <b>{val.reviewerEmail}</b><br></br>
+                        <br />
+                        <br />
+                        <ThumbUpIcon/>
+                        <ThumbDownIcon/>
+                        </Typography>
+                    </CardContent>
+                    <CardActions>   
+                    </CardActions>
+                </Card>
+            </Grid2>
+              }):"Loading...."
             }
            </Stack>
           </Grid2>
        </Grid2>
-           
         </>
 }
    

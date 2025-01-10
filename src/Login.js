@@ -223,9 +223,9 @@ export default function Login(props) {
               Sign in with Facebook
             </Button> */}
             <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
+              Dont have an account?{' '}
               <Link
-                href="/material-ui/getting-started/templates/sign-in/"
+                href={`/Registration`}
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
