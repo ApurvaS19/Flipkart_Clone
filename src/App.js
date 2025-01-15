@@ -7,7 +7,9 @@ import ACard from './ACard'
 import Login from './Login'
  import Drawer from './myDrawer'
 import Registration from './Registration';
-
+ import Mini from './Mini';
+import Appbar from './Appbar';
+import Pa from './Pa';
 
 function App() {
   return <>
@@ -19,8 +21,10 @@ function App() {
        <Route path='Card'element={<BasicCard />}/>
        <Route path='Acard'element={<ACard/>}/>
        <Route path='Drawer'element={<myDrawer/>}/>
-       <Route path='Registration'element={<Registration/>}/>    
-     
+       <Route path='Registration'element={<Registration/>}/>   
+       <Route path='Mini'element={<Mini/>}/> 
+       <Route path='Appbar'element={<Appbar/>}/> 
+       {/* <Route path='Pa'element={<Pa/>}/>  */}
       </Routes>
     </BrowserRouter>
 

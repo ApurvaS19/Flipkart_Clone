@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useState } from 'react';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,6 +15,8 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 //import ForgotPassword from './ForgotPassword';
 //import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
@@ -70,7 +73,7 @@ export default function Login(props) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = () =>{
     setOpen(true);
   };
 
@@ -90,32 +93,69 @@ export default function Login(props) {
     });
   };
 
-  const validateInputs = () => {
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
 
-    let isValid = true;
+  const [email, setEmail] = useState({});  
+   const [password, setPassword] = useState();
+   const navigate = useNavigate();
+   
+  //  function SubmitData(){
+   
+  //   console.log("email : ",email);    
+  //   console.log("pass : ",password);
+  //  }
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+   const validateInputs = ()=> {
+  //   const email = document.getElementById('email');
+  //   const password = document.getElementById('password');
+   let isValid = true;
+
+    // validation
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError(true);
       setEmailErrorMessage('Please enter a valid email address.');
       isValid = false;
     } else {
       setEmailError(false);
       setEmailErrorMessage('');
+      //return false;
     }
+ 
 
-    if (!password.value || password.value.length < 6) {
+    if (!password || password.length<6) {
       setPasswordError(true);
       setPasswordErrorMessage('Password must be at least 6 characters long.');
       isValid = false;
     } else {
       setPasswordError(false);
       setPasswordErrorMessage('');
+      //return false;
     }
+    
+  //   axios.post("https://jsonplaceholder.typicode.com/posts", {email, password}, { headers: {
+  //     'Content-type': 'application/json; charset=UTF-8',
+  //   }} )
+  //   .then((response) => {
 
-    return isValid;
-  };
+  //     //check response
+  //     if(response.status == "201"){
+  //       console.log("Login successfully");
+  //       navigate("/products");
+  //     }else{
+  //       console.log("Not Login successfully");
+
+  //     }
+  //   })
+  //   .catch((error)=>{ console.log(error)})
+  // }
+
+    if(email== "Apurva@gmail.com" && password == "123456"){
+      console.log("Login successfully");
+      navigate("/ACard");
+    }else{
+      console.log("Not Login successfully");
+    }   
+  }
+    
 
   return (
        /* <AppTheme {...props}> */
@@ -133,9 +173,9 @@ export default function Login(props) {
             Sign in
           </Typography>
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
+            // component="form"
+            // onSubmit={handleSubmit}
+             noValidate
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -158,13 +198,16 @@ export default function Login(props) {
                 fullWidth
                 variant="outlined"
                 color={emailError ? 'error' : 'primary'}
+                onChange={(event)=>{setEmail(event.target.value); 
+               console.log("email",email);}}                            
               />
             </FormControl>
+            
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
+                 error={passwordError}
+                 helperText={passwordErrorMessage}
                 name="password"
                 placeholder="••••••"
                 type="password"
@@ -174,6 +217,8 @@ export default function Login(props) {
                 required
                 fullWidth
                 variant="outlined"
+                onChange={(event)=>{setPassword(event.target.value);
+                  console.log("Password",password);}}
                 color={passwordError ? 'error' : 'primary'}
               />
             </FormControl>
@@ -187,18 +232,17 @@ export default function Login(props) {
               type="submit"
               fullWidth
               variant="contained"
-              onClick={validateInputs}
-            
-              href={`/ACard`}
-
+              onClick={(event)=>{validateInputs()}}
+              // onClick={validateInputs} 
+              // href={`/ACard`}
             >
              Sign in
             </Button>
             <Link
               component="button"
               type="button"
-              onClick={handleClickOpen}
-              variant="body2"
+                onClick={handleClickOpen}
+               variant="body2"
               sx={{ alignSelf: 'center' }}
             >
               Forgot your password?

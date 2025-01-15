@@ -29,8 +29,14 @@ function Product(){
 
   },[])
  
+  const [productCount,setProductCount]=useState(0)
+  function addToCart(){
+    console.log("I am in Add To Cart")
+    setProductCount(productCount + 1)
+  }
+
     return <>
-    <Appbar/>
+    <Appbar productCount={productCount}/>
     <Drawer1/>
         <>Product page {id} </>
         <Grid2 container spacing={2} >
@@ -44,7 +50,7 @@ function Product(){
            <b>Price</b>:${data.price}<br></br><br></br>
            <b>Return Policy</b>:{data.returnPolicy}<br></br><br></br>
            <Button variant="contained" startIcon={<StoreIcon />}>Buy Now</Button>
-           <Button variant="contained" startIcon={<ShoppingCartIcon/>}>Add To Cart</Button>
+           <Button variant="contained" onClick={()=>(addToCart())} startIcon={<ShoppingCartIcon/>}>Add To Cart</Button>
           </Grid2>
      
          <Grid2 size={{ xs: 12, md: 6 }}>

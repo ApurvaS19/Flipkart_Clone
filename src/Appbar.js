@@ -13,12 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Mini from './Mini';
 
 
 const pages = ['Products', 'Pricing', 'Blog','Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Appbar() {
+function Appbar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -38,10 +39,12 @@ function Appbar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+    
+    <AppBar position="static"> 
+      <Container maxWidth="xl">    
+        <Toolbar disableGutters> 
+ 
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />      
           <Typography
             variant="h6"
             noWrap
@@ -55,8 +58,9 @@ function Appbar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+             
             }}
-            
+          
           >
           FLIPKART
           
@@ -113,8 +117,8 @@ function Appbar() {
               textDecoration: 'none',
             }}
           >
+            
             FLIPKART
-           
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -128,7 +132,7 @@ function Appbar() {
               
             ))}
           </Box>
-          <ShoppingCartIcon/>
+          <ShoppingCartIcon/>{props.productCount}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
