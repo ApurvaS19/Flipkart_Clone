@@ -12,7 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Badge from '@mui/material/Badge';
 import Mini from './Mini';
 
 
@@ -132,7 +133,12 @@ function Appbar(props) {
               
             ))}
           </Box>
-          <ShoppingCartIcon/>{props.productCount}
+
+          <Badge badgeContent={props.productCount} color="warning" >
+         <ShoppingCartOutlinedIcon   fontSize='large'/>
+         </Badge>
+
+          {/* <ShoppingCartIcon/>{props.productCount} */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

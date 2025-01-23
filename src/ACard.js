@@ -9,7 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import { pink, red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -60,7 +60,7 @@ export default function ACard() {
   };
 
   return <>
-  <Appbar/>
+  {/* <Appbar/> */}
   <Container sx={{margin:5}} >
     <Grid2 spacing={5} container >
     {data && data.map((val)=>{
@@ -99,7 +99,7 @@ export default function ACard() {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <a href={`/Product/${val.id}`}>View</a>
+        <a href={`/ACard/Product/${val.id}`}>View</a>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -111,8 +111,8 @@ export default function ACard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography sx={{ marginBottom: 2 }}>Method:</Typography>
-          <Typography sx={{ marginBottom: 2 }}>         
+          {/* <Typography sx={{ marginBottom: 2 }}>Method:</Typography> */}
+          {/* <Typography sx={{ marginBottom: 2 }}>         
           </Typography>
 
           <Typography sx={{ marginBottom: 2 }}>          
@@ -122,7 +122,7 @@ export default function ACard() {
           </Typography>
 
           <Typography>
-          </Typography>
+          </Typography> */}
         </CardContent>
       </Collapse>
     </Card>

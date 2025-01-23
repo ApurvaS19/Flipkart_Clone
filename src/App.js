@@ -14,7 +14,13 @@ import Pa from './Pa';
 function App() {
   return <>
     <BrowserRouter> 
+
       <Routes>
+      <Route path='ACard' element={<Mini/>}>
+        <Route path='' element={<ACard/>}/>
+        <Route path='Product/:id' element={<Product/>}/>
+      </Route>
+
       <Route path='/'element={<Login/>}/>
        <Route path='Table'element={<BasicTable/>}/>
        <Route path='Product/:id'element={<Product/>}/>
