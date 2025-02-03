@@ -1,4 +1,6 @@
 
+
+
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -25,7 +27,6 @@ import Appbar from './Appbar';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
- 
 const ExpandMore = styled((props) => {
 
   const { expand, ...other } = props;
@@ -51,7 +52,7 @@ const ExpandMore = styled((props) => {
   ],
 }));
 
-export default function ACard(){
+export default function ACard() {
 
   let props = React.useContext(ProductCountContext)
   const { cart, removeFromCart } = React.useContext(ProductCountContext)
@@ -68,23 +69,19 @@ export default function ACard(){
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
-    setExpanded(!expanded)
-    
+    setExpanded(!expanded);
   };
 
   
-    
 
-    
-
-  return <>
+  return<>
 
     <Grid2 container spacing={2}>
       <Grid2 container size={9}>
 
         {data && data.map((val) => {
           return <Grid2 item size={4}>
-            <Card sx={{ maxWidth: 345 }}>
+            R <Card sx={{ maxWidth: 345 }}>
 
               <CardHeader
                 avatar={
@@ -112,19 +109,13 @@ export default function ACard(){
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
-
-                <IconButton aria-label="add to favorites"        
-               
-                
-                 >
-
+                <IconButton aria-label="add to favorites">
                   <FavoriteIcon />
                 </IconButton>
-
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <Button variant="contained" size='small' href={`/ACard/Product/${val.id}`} style={{ marginRight: '15px' }}>View</Button>
+                <a href={`/ACard/Product/${val.id}`} style={{ marginRight: '15px' }}>View</a>
                 <Button variant="contained" onClick={(event) => {
 
                   props.addToCart(val);
@@ -141,7 +132,18 @@ export default function ACard(){
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
+                  {/* <Typography sx={{ marginBottom: 2 }}>Method:</Typography> */}
+                  {/* <Typography sx={{ marginBottom: 2 }}>         
+       </Typography>
 
+       <Typography sx={{ marginBottom: 2 }}>          
+       </Typography>
+
+       <Typography sx={{ marginBottom: 2 }}>           
+       </Typography>
+
+       <Typography>
+       </Typography> */}
                 </CardContent>
               </Collapse>
             </Card>
@@ -151,38 +153,39 @@ export default function ACard(){
 
 
       <Grid2 size={3}>
-        {/* <Grid2 container style={{ backgroundColor: " #0066B2", border: "2px solid black" }}> */}
+        <Grid2 container style={{ backgroundColor: " #0066B2", border: "2px solid black" }}>
 
-        {props.arr.map((val, index) => {
-          return <Grid2 item size={{ xs: 6, md: 4 }}>
-            <Card sx={{ minWidth: 275, backgroundColor: "#4B9CD3", margin: "40px", border: "2px solid black" }} >
-              <CardContent>
-                <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }} style={{ color: "black" }}>
-                  <b>Title: </b>{val.title}
-                </Typography>
+          {props.arr.map((val, index) => {
+            return <Grid2 item size={{ xs: 6, md: 4 }}>
+              <Card sx={{ minWidth: 275, backgroundColor: "#4B9CD3", margin: "40px", border: "2px solid black" }} >
+                <CardContent>
+                  <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }} style={{ color: "black" }}>
+                    <b>Title: </b>{val.title}
+                  </Typography>
 
-                <Typography sx={{ color: 'text.secondary', mb: 1.5 }} style={{ color: "black" }}>
-                  {/* <b>Quantity:</b>{val.quantity} */}
-                </Typography>
-                <Typography variant="body2" style={{ color: "black" }}>
-                  <b>Amount:</b>{val.price}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button variant='contained' size="small" style={{ marginRight: "10px", backgroundColor: "red" }} onClick={(event) => {
-                  props.deleteItem(val.id);
-                }}> <DeleteIcon /></Button>
-              </CardActions>
+                  <Typography sx={{ color: 'text.secondary', mb: 1.5 }} style={{ color: "black" }}>
+                    {/* <b>Quantity:</b>{val.quantity} */}
+                  </Typography>
+                  <Typography variant="body2" style={{ color: "black" }}>
+                    <b>Amount:</b>{val.price}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <DeleteIcon onClick={(event) =>
+                    removeCart(val.id)
+                  }> </DeleteIcon>
+                </CardActions>
 
-            </Card>
-          </Grid2>
+              </Card>
 
-        })}
-        {/* </Grid2> */}
-        <span id="bu"> <b>Total:<strong>${totalPrice}</strong></b> </span><br /><br />
-        <span id="bu"><Button variant="contained" >CheckOut</Button></span>
+            </Grid2>
+          }
+          )}
+          <span id="bu"> <b>Total:<strong>${totalPrice}</strong></b> </span><br /><br />
+          <span id="bu"><Button variant="contained" >CheckOut</Button></span>
 
+        </Grid2>
       </Grid2>
-    </Grid2>
-  </>
-  }
+    </>
+
+    }

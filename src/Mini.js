@@ -19,6 +19,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Appbar from "./Appbar";
+import { CountContext, ProductCountContext } from './Context';
 // import Products from "./Products"
 import { useState } from "react";
 // import Layout from './Layout';
@@ -107,11 +108,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
-  const[productCount,setProductCount]=useState(0)
-  function addToCart(){
-    console.log("I am in add to cart");
-    setProductCount(productCount+1)
-  }
+
+  let obj = React.useContext(ProductCountContext);
+
+  console.log("productCount", obj);
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -145,8 +146,9 @@ export default function MiniDrawer() {
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             
-          <Appbar productCount={localStorage.getItem("pc")}/>
+          <Appbar productCount={obj.arr.length}/>
           </Typography>
+
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

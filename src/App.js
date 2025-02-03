@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import BasicTable from './Table'
 import Product from './Product';
 import BasicCard from './Card'
@@ -10,10 +11,39 @@ import Registration from './Registration';
  import Mini from './Mini';
 import Appbar from './Appbar';
 import Pa from './Pa';
+import { ProductCountContext} from './Context';
+import { useState } from 'react';
+
+
 
 function App() {
+  const [arr, setArr]= useState([])
+
+  function addToCart(product){
+    console.log("I am in add to cart", product);
+
+    arr.push(product);
+    setArr([...arr]);
+  }
+  
+  function deleteItem(id){
+    console.log("i m in delte", id);
+
+    let newArr = arr.filter((val)=>{
+      if(val.id != id){
+        return val
+      }
+    })
+    setArr([...newArr]); 
+  }
+  
+  
   return <>
+    <ProductCountContext.Provider value={ {addToCart: addToCart, arr: arr,deleteItem:deleteItem} } >
+  
+    
     <BrowserRouter> 
+
 
       <Routes>
       <Route path='ACard' element={<Mini/>}>
@@ -33,6 +63,7 @@ function App() {
        {/* <Route path='Pa'element={<Pa/>}/>  */}
       </Routes>
     </BrowserRouter>
+    </ProductCountContext.Provider>
 
   </>      
 }

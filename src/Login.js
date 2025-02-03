@@ -17,6 +17,7 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Alert from '@mui/material/Alert';
 
 //import ForgotPassword from './ForgotPassword';
 //import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
@@ -128,6 +129,9 @@ export default function Login(props) {
     } else {
       setPasswordError(false);
       setPasswordErrorMessage('');
+      
+      
+     
       //return false;
     }
     
@@ -152,14 +156,22 @@ export default function Login(props) {
       console.log("Login successfully");
       navigate("/ACard");
     }else{
+     
       console.log("Not Login successfully");
+      alert('PLEASE CHECK YOUR EMAIL AND PASSWORD')
     }   
   }
     
 
   return (
+   
        /* <AppTheme {...props}> */
-       <>
+       <> 
+       
+          
+             
+       
+       
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
        {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}

@@ -18,15 +18,17 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { green } from "@mui/material/colors";
 import { Title } from "@mui/icons-material";
+import { ProductCountContext } from "./Context";
 
 function Product() {
 
+  let props = React.useContext(ProductCountContext)
 
   let { id } = useParams();
   const [data, setData] = useState([])
 
   let arr = [{ Title: "Mumbai", Quantity: "25C", Amount: "1.3kmph" },
-             { Title: "Nagpur", Quantity: "22C", Amount: "1.43kmph" }]
+  { Title: "Nagpur", Quantity: "22C", Amount: "1.43kmph" }]
 
   useEffect(() => {
     axios.get(`https://dummyjson.com/products/${id}`)
@@ -34,24 +36,27 @@ function Product() {
       .catch(err => console.log(err))
 
   }, [])
-   
-    let obj=[{Title:data.title},
-             {Amount:data.price}]
- 
-    const[item,setItem]=useState(0)
-  const[productCount,setProductCount]=useState(0)
-  function addToCart(){
+
+  let obj = [{ Title: data.title },
+  { Amount: data.price }]
+
+  const [item, setItem] = useState(0)
+  const [productCount, setProductCount] = useState(0)
+
+  const [Count, setCount] = useState(0)
+
+  function addToCart() {
     console.log("I am in add to cart");
-    if(!localStorage.getItem("pc")){
-      localStorage.setItem('pc',0);
-     
-     
-      const jsonstring=JSON.stringify(obj);
-      localStorage.setItem('item', jsonstring );
-     
+    if (!localStorage.getItem("pc")) {
+      localStorage.setItem('pc', 0);
+
+      const jsonstring = JSON.stringify(obj);
+      localStorage.setItem('item', jsonstring);
+
     }
-    localStorage.setItem('pc', parseInt(localStorage.getItem("pc"))+1)
-    setProductCount(productCount+1)
+    localStorage.setItem('pc', parseInt(localStorage.getItem("pc")) +1)
+    setProductCount(productCount + 1)
+
   }
 
   return <>
@@ -69,41 +74,15 @@ function Product() {
         <b>Price</b>:${data.price}<br></br><br></br>
         <b>Return Policy</b>:{data.returnPolicy}<br></br><br></br>
         <Button variant="contained" startIcon={<StoreIcon />}>Buy Now</Button>
-        <Button variant="contained" onClick={() => (addToCart({obj}))} startIcon={<ShoppingCartIcon />}>Add To Cart</Button>
-      </Grid2>
+        <Button variant="contained" onClick={(event) => {
 
-      <Grid2 container style={ {backgroundColor: " #0066B2" ,border:"2px solid black"} }>
-      <Grid2 size={{ xs: 6, md: 4 }}>
-        {arr.map((val, index) => {
-        return<Grid2 item size={{xs:6,md:2}}>
-          <Card sx={{ minWidth: 275, backgroundColor: "#4B9CD3" , margin: "40px" ,border:"2px solid black"}} >
-            <CardContent>
-              <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }} style={{ color: "black" }}>
-              <b>Title: </b>{val.Title}
-              </Typography>
+          props.addToCart(data);
 
-              <Typography sx={{ color: 'text.secondary', mb: 1.5 }} style={{ color: "black" }}>
-                <b>Quantity:</b>{val.Quantity}
-                </Typography>
-              <Typography variant="body2" style={{ color: "black" }}>
-              <b>Amount:</b>  {val.Amount}
-              </Typography>
-            </CardContent>
-            <CardActions>
-            
-            </CardActions>
-          </Card>
-          
-          </Grid2>
-        }
-        )}
-          <span id="bu"> <b>Total:</b> </span><br/><br/>
-          <span id="bu"><Button variant="contained" >CheckOut</Button></span>
+        }} startIcon={<ShoppingCartIcon />}>Add to Cart</Button>
 
       </Grid2>
-     
-      </Grid2>
-     
+
+
       <Grid2 size={{ xs: 12, md: 6 }}>
         <b>Rating:</b>
         {data.rating}
